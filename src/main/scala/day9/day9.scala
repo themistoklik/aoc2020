@@ -1,6 +1,6 @@
 package themis.aoc2020
+package day9
 
-import scala.::
 import scala.collection.mutable
 import scala.io.Source
 import scala.util.Using
@@ -51,10 +51,10 @@ object day9 {
     val boundaries = sums.maxBy(p => p._2.last - p._2.head)._2
     val lo = boundaries.head + 1
     val hi = boundaries.last
-    val seq = numbers.get.slice(lo,hi+1)
+    val seq = numbers.get.slice(lo, hi + 1)
     println(seq)
     println(seq.sum)
-    print(seq.max+seq.min)
+    print(seq.max + seq.min)
 
   }
 }
