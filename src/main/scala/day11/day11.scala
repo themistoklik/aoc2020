@@ -1,4 +1,5 @@
 package themis.aoc2020
+package day11
 
 import scala.io.Source
 import scala.util.Using
