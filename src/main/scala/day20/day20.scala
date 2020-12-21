@@ -95,6 +95,7 @@ object day20 {
     })
     println(n)
     //oh boi here i go guessing again
+    //do a global search for a monster pattern in your debordered input then +- some for split monsters between frames
     20.to(50).foreach(x => {
       println(n-x*15)
     })
