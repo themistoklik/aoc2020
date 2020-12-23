@@ -5,6 +5,15 @@ import scala.io.Source
 import scala.util.Using
 
 object day23 {
+
+  private def getDestinationCup(currentCup: Node) = {
+    if ((currentCup.id - 1) == 0) 1_000_000 else currentCup.id - 1
+  }
+
+  private def getDestinationCup(id: Int): Int = {
+    if ((id - 1) == 0) 1_000_000 else id - 1
+  }
+
   type Label = Char
 
   type Index = Int
@@ -33,7 +42,7 @@ object day23 {
 
   def main(args: Array[String]): Unit = {
 
-    var input: String = Using(Source.fromFile("/Users/themis/IdeaProjects/aoc2020.scala/src/main/scala/inputs/day23.txt")) {
+    val input: String = Using(Source.fromFile("/Users/themis/IdeaProjects/aoc2020.scala/src/main/scala/inputs/day23.txt")) {
       source =>
         source.mkString
     }
@@ -53,15 +62,8 @@ object day23 {
       val destCup = getDestCup(currCup, inp, pickUp)
 
       val p = (inp ++ inp).slice(currIdx + 1, currIdx + 4)
-      //      println(pickUp)
-      //      println(currIdx, currCup)
-      //      println(destCupIdx, destCup)
-
-      //      println(inp)
       inp = inp.filterNot(c => pickUp contains c)
-      //      println("filtered:", inp)
       val enterAt = inp.indexOf(destCup) + 1 % inp.length
-      //      println(enterAt)
       inp = inp.slice(0, enterAt) ++ p ++ inp.slice(enterAt, inp.length)
       currIdx = (inp.indexOf(currCup) + 1) % inp.length
     })
@@ -91,7 +93,7 @@ object day23 {
       })
 
     var currentCup = cups(inputNums.head)
-    0 to 10_000_000 foreach { xx =>
+    0 to 10_000_000 foreach { _ =>
       val picks: List[Int] = List(currentCup.next, currentCup.next.next, currentCup.next.next.next)
         .map(node => node.id)
       currentCup.next = cups(picks.last).next
@@ -109,13 +111,5 @@ object day23 {
     }
 
     println(cups(1).next.id.toLong * cups(1).next.next.id.toLong)
-  }
-
-  private def getDestinationCup(currentCup: Node) = {
-    if ((currentCup.id - 1) == 0) 1_000_000 else currentCup.id - 1
-  }
-
-  private def getDestinationCup(id: Int): Int = {
-    if ((id - 1) == 0) 1_000_000 else id - 1
   }
 }
